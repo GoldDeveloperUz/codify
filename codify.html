@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CODIFY — Zamonaviy kasblarni noldan o'rgatuvchi, sun'iy intellekt vositalarini amaliy qo'llashni o'rgatuvchi innovatsion ta'lim platformasi.">
+<title>CODIFY — Kelajak Kasblari Platformasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+
+  :root {
+    --orange: #FF6B00;
+    --orange-light: #FF8C00;
+    --orange-glow: rgba(255,107,0,0.3);
+    --white: #FFFFFF;
+    --charcoal: #1A1A1A;
+    --charcoal-2: #222222;
+    --charcoal-3: #2C2C2C;
+    --text-muted: #777;
+    --grad: linear-gradient(135deg, #FF6B00, #FF8C00);
+    --font-display: 'Clash Display', 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius: 16px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--charcoal);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* LUCIDE ICONS */
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon svg {
+    width: 1em;
+    height: 1em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 5%;
+    background: rgba(20,20,20,0.88);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,107,0,0.12);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-img {
+    width: 36px; height: 36px;}
+
+  .nav-logo-text {
+    font-family: var(--font-display);
+    font-size: 1.4rem; font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 3px;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.65); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.5px;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--grad); color: white; border: none; padding: 10px 24px;
+    border-radius: 50px; font-family: var(--font-body); font-weight: 600; font-size: 0.88rem;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--orange-glow); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 120px 5% 80px;
+    background:
+      radial-gradient(ellipse at 15% 55%, rgba(255,107,0,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(255,140,0,0.09) 0%, transparent 50%),
+      var(--charcoal);
+  }
+  .particles { position: absolute; inset: 0; pointer-events: none; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: var(--orange);
+    animation: float-p 8s infinite ease-in-out;
+  }
+  @keyframes float-p {
+    0%,100% { transform: translateY(0) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-28px) scale(1.1); opacity: 0.7; }
+  }
+
+  .hero-content { text-align: center; max-width: 900px; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,107,0,0.1); border: 1px solid rgba(255,107,0,0.3);
+    padding: 8px 20px; border-radius: 50px; margin-bottom: 2rem;
+    font-size: 0.82rem; font-weight: 600; color: var(--orange);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    animation: fade-in-down 0.8s ease forwards;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.5px;
+    animation: fade-in-up 0.9s 0.2s ease both;
+  }
+  .hero-title span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    color: rgba(255,255,255,0.6);
+    max-width: 600px; margin: 1.5rem auto 2.5rem;
+    font-weight: 400;
+    animation: fade-in-up 0.9s 0.35s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fade-in-up 0.9s 0.5s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--grad); color: white;
+    padding: 16px 36px; border-radius: 50px; border: none;
+    font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 0 30px rgba(255,107,0,0.38);
+    letter-spacing: 0.3px;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(255,107,0,0.55); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18);
+    color: white; padding: 16px 36px; border-radius: 50px;
+    font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s; backdrop-filter: blur(10px);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: var(--orange); color: var(--orange); transform: translateY(-3px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 4rem; padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    animation: fade-in-up 0.9s 0.7s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--orange); }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.5px; }
+
+  /* SECTIONS */
+  section { padding: 100px 5%; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,107,0,0.1); border: 1px solid rgba(255,107,0,0.28);
+    color: var(--orange); padding: 6px 16px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.3px;
+  }
+  .section-sub { color: var(--text-muted); max-width: 560px; margin-top: 0.8rem; font-size: 1rem; }
+
+  /* ABOUT */
+  #about { background: var(--charcoal-2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .feature-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+  .card {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius); padding: 1.5rem;
+    transition: all 0.3s; cursor: default;
+  }
+  .card:hover {
+    background: rgba(255,107,0,0.07); border-color: rgba(255,107,0,0.28);
+    transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .card-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(255,107,0,0.15); border: 1px solid rgba(255,107,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); font-size: 1.2rem; margin-bottom: 0.9rem;
+  }
+  .card h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; letter-spacing: 0.3px; }
+  .card p { font-size: 0.82rem; color: var(--text-muted); }
+
+  .about-visual {
+    background: linear-gradient(135deg, rgba(255,107,0,0.12), rgba(255,140,0,0.04));
+    border: 1px solid rgba(255,107,0,0.18);
+    border-radius: var(--radius-lg); padding: 2.5rem;
+    min-height: 380px; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .orbits { position: relative; width: 200px; height: 200px; }
+  .orbit {
+    position: absolute; border: 1px solid rgba(255,107,0,0.2); border-radius: 50%;
+    animation: spin 10s linear infinite;
+  }
+  .orbit:nth-child(1) { width: 200px; height: 200px; top: 0; left: 0; }
+  .orbit:nth-child(2) { width: 140px; height: 140px; top: 30px; left: 30px; animation-direction: reverse; animation-duration: 7s; }
+  .orbit:nth-child(3) { width: 80px; height: 80px; top: 60px; left: 60px; animation-duration: 5s; }
+  .orbit-dot {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange); top: -4px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--orange);
+  }
+  .orbit-core {
+    position: absolute; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--grad); top: 85px; left: 85px;
+    box-shadow: 0 0 30px rgba(255,107,0,0.6);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse-glow { 0%,100%{ box-shadow: 0 0 30px rgba(255,107,0,0.6); } 50%{ box-shadow: 0 0 60px rgba(255,107,0,0.9); } }
+
+  /* DIRECTIONS */
+  #directions { background: var(--charcoal); }
+  .dir-header { text-align: center; margin-bottom: 3rem; }
+  .dir-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.5rem; }
+  .dir-card {
+    background: rgba(255,255,255,0.028); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center;
+    transition: all 0.3s; cursor: default;
+  }
+  .dir-card:hover {
+    background: rgba(255,107,0,0.07); border-color: rgba(255,107,0,0.38);
+    transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+  }
+  .dir-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: rgba(255,107,0,0.12); border: 1px solid rgba(255,107,0,0.18);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); font-size: 1.5rem; margin: 0 auto 1rem;
+    transition: all 0.3s;
+  }
+  .dir-card:hover .dir-icon { background: rgba(255,107,0,0.22); transform: scale(1.05); }
+  .dir-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .dir-card p { font-size: 0.8rem; color: var(--text-muted); }
+  .dir-features {
+    display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center;
+    margin-top: 3rem;
+  }
+  .dir-feat {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    padding: 9px 18px; border-radius: 50px; font-size: 0.83rem; color: rgba(255,255,255,0.8);
+  }
+  .dir-feat .icon { color: var(--orange); font-size: 0.9rem; }
+
+  /* CERTIFICATES */
+  #certificates { background: var(--charcoal-2); }
+  .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .cert-mockup {
+    background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+    border: 1px solid rgba(255,107,0,0.22); border-radius: var(--radius-lg);
+    padding: 2.5rem; position: relative; overflow: hidden;
+  }
+  .cert-mockup::before {
+    content: ''; position: absolute; top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse, rgba(255,107,0,0.07), transparent 60%);
+  }
+  .cert-inner {
+    border: 2px solid rgba(255,107,0,0.35); border-radius: var(--radius);
+    padding: 2rem; text-align: center; position: relative;
+  }
+  .cert-logo-wrap { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.2rem; }
+  .cert-logo-img { width: 32px; height: 32px; filter: brightness(0) saturate(100%) invert(45%) sepia(91%) saturate(900%) hue-rotate(10deg); }
+  .cert-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--orange); letter-spacing: 3px; }
+  .cert-title { font-size: 0.65rem; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; }
+  .cert-divider { width: 60px; height: 2px; background: var(--grad); margin: 1.5rem auto; }
+  .cert-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .cert-course { font-size: 0.82rem; color: var(--text-muted); }
+  .cert-seal {
+    width: 58px; height: 58px; border-radius: 50%; background: var(--grad);
+    margin: 1.5rem auto 0; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.4rem; box-shadow: 0 0 28px rgba(255,107,0,0.5);
+  }
+
+  .trust-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .badge {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07);
+    padding: 14px 16px; border-radius: var(--radius); transition: all 0.3s;
+  }
+  .badge:hover { border-color: rgba(255,107,0,0.28); background: rgba(255,107,0,0.05); }
+  .badge-icon { color: var(--orange); font-size: 1.3rem; flex-shrink: 0; }
+  .badge-text { font-size: 0.83rem; font-weight: 500; }
+
+  /* STARTUP */
+  #startup { background: var(--charcoal); }
+  .startup-header { text-align: center; margin-bottom: 4rem; }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute;
+    top: 30px; left: 12.5%; right: 12.5%;
+    height: 2px; background: linear-gradient(to right, var(--orange), var(--orange-light));
+    z-index: 0;
+  }
+  .timeline-step { text-align: center; position: relative; z-index: 1; padding: 0 1rem; }
+  .step-num {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--grad); display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
+    box-shadow: 0 0 30px rgba(255,107,0,0.4);
+  }
+  .step-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.8rem; color: var(--text-muted); }
+  .startup-cta { text-align: center; margin-top: 4rem; }
+
+  /* JOBS */
+  #jobs { background: var(--charcoal-2); }
+  .jobs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .dashboard-mock {
+    background: #181818; border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-lg); overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  }
+  .dash-topbar {
+    background: #222; padding: 14px 20px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dash-title { font-size: 0.78rem; color: var(--text-muted); margin-left: 8px; letter-spacing: 0.5px; }
+  .dash-body { padding: 20px; }
+  .dash-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .dash-filter {
+    padding: 6px 14px; border-radius: 20px; font-size: 0.73rem;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    color: var(--text-muted);
+  }
+  .dash-filter.active { background: rgba(255,107,0,0.18); border-color: rgba(255,107,0,0.45); color: var(--orange); }
+  .job-item {
+    background: rgba(255,255,255,0.028); border: 1px solid rgba(255,255,255,0.055);
+    border-radius: 10px; padding: 14px; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .job-logo {
+    width: 36px; height: 36px; border-radius: 8px; background: var(--grad);
+    display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; flex-shrink: 0;
+  }
+  .job-info h5 { font-size: 0.83rem; font-weight: 600; }
+  .job-info p { font-size: 0.73rem; color: var(--text-muted); }
+  .job-salary { margin-left: auto; font-size: 0.78rem; color: var(--orange); font-weight: 600; }
+  .job-features { list-style: none; margin-top: 2rem; }
+  .job-features li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.92rem;
+  }
+  .job-features li .icon { color: var(--orange); font-size: 1rem; flex-shrink: 0; }
+
+  /* COINS */
+  #coins { background: var(--charcoal); overflow: hidden; position: relative; }
+  #coins::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,107,0,0.07), transparent 70%);
+  }
+  .coins-header { text-align: center; margin-bottom: 4rem; position: relative; }
+  .coins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; position: relative; }
+  .coin-card {
+    background: rgba(255,255,255,0.028); border: 1px solid rgba(255,107,0,0.13);
+    border-radius: var(--radius); padding: 2rem; text-align: center; transition: all 0.3s;
+  }
+  .coin-card:hover {
+    transform: translateY(-8px); border-color: rgba(255,107,0,0.45);
+    box-shadow: 0 20px 50px rgba(255,107,0,0.13);
+  }
+  .coin-icon {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B00, #FFB347);
+    margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.5rem;
+    box-shadow: 0 0 28px rgba(255,107,0,0.45), 0 0 56px rgba(255,107,0,0.18);
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  .coin-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .coin-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* PERSONALIZED */
+  #personalized { background: var(--charcoal-2); }
+  .pers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .pers-item {
+    background: rgba(255,255,255,0.028); border: 1px solid rgba(255,255,255,0.065);
+    border-radius: var(--radius); padding: 2rem; transition: all 0.3s;
+  }
+  .pers-item:hover { border-color: rgba(255,107,0,0.28); transform: translateY(-4px); }
+  .pers-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(255,107,0,0.12); border: 1px solid rgba(255,107,0,0.18);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); font-size: 1.3rem; margin-bottom: 1rem;
+  }
+  .pers-item h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .pers-item p { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* WHY */
+  #why { background: var(--charcoal); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .checklist { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+  .check-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.028); border: 1px solid rgba(255,255,255,0.065);
+    padding: 13px 18px; border-radius: 12px; transition: all 0.3s;
+  }
+  .check-item:hover { border-color: rgba(255,107,0,0.28); background: rgba(255,107,0,0.04); }
+  .check-mark {
+    width: 26px; height: 26px; border-radius: 50%; background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.7rem; flex-shrink: 0;
+  }
+  .check-text { font-size: 0.92rem; font-weight: 500; }
+  .why-visual {
+    background: rgba(255,107,0,0.045); border: 1px solid rgba(255,107,0,0.13);
+    border-radius: var(--radius-lg); padding: 3rem; text-align: center;
+  }
+  .big-number { font-family: var(--font-display); font-size: 5rem; font-weight: 700; color: var(--orange); line-height: 1; }
+  .big-label { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem; }
+  .why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .why-stat { text-align: center; }
+  .why-stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--orange); }
+  .why-stat-label { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* CTA */
+  #cta {
+    background: linear-gradient(135deg, #180900, #250e00, #180900);
+    position: relative; overflow: hidden; text-align: center; padding: 120px 5%;
+  }
+  #cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,107,0,0.22), transparent 70%);
+    animation: cta-pulse 4s ease-in-out infinite;
+  }
+  @keyframes cta-pulse { 0%,100%{ opacity: 0.7; } 50%{ opacity: 1; } }
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; line-height: 1.1; position: relative; z-index: 1;
+    margin-bottom: 1.5rem; letter-spacing: -0.3px;
+  }
+  .cta-title span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .cta-sub { color: rgba(255,255,255,0.55); font-size: 1.05rem; max-width: 480px; margin: 0 auto 2.5rem; position: relative; z-index: 1; }
+  .btn-big {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--grad); color: white;
+    padding: 20px 52px; border-radius: 50px; border: none;
+    font-family: var(--font-body); font-size: 1.05rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s; position: relative; z-index: 1;
+    box-shadow: 0 0 60px rgba(255,107,0,0.48);
+  }
+  .btn-big:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(255,107,0,0.7); }
+
+  /* FOOTER */
+  footer {
+    background: #0e0e0e; padding: 60px 5% 30px;
+    border-top: 1px solid rgba(255,107,0,0.18);
+  }
+  .footer-accent { width: 100%; height: 2px; background: var(--grad); border-radius: 2px; margin-bottom: 2.5rem; opacity: 0.35; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+  .footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .footer-logo-img { width: 34px; height: 34px; filter: brightness(0) invert(1); }
+  .footer-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
+  .footer-desc { font-size: 0.83rem; color: var(--text-muted); max-width: 280px; }
+  .footer-col h5 { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-col ul a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+  .footer-col ul a:hover { color: white; }
+  .social-links { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+  .social-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: all 0.3s; color: var(--text-muted);
+  }
+  .social-btn:hover { background: rgba(255,107,0,0.18); border-color: rgba(255,107,0,0.45); transform: translateY(-3px); color: var(--orange); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* ANIMATIONS */
+  @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fade-in-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .about-grid, .cert-grid, .jobs-grid, .why-grid { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .timeline::before { display: none; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .feature-cards { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 14px 4%; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: rgba(18,18,18,0.98); padding: 2rem; z-index: 99; gap: 1rem; }
+    .feature-cards { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr; }
+    .trust-badges { grid-template-columns: 1fr; }
+    .why-stats { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="logo.png">
+    <span class="nav-logo-text">CODIFY</span>
+  </a>
+  <ul class="nav-links" id="navlinks">
+    <li><a href="#about">Platforma</a></li>
+    <li><a href="#directions">Yo'nalishlar</a></li>
+    <li><a href="#startup">Startup</a></li>
+    <li><a href="#jobs">Ish topish</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Boshlash</button>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span data-lucide="zap" style="width:14px;height:14px;stroke:currentColor;fill:none"></span>
+      Kelajak Kasblari Platformasi
+    </div>
+    <h1 class="hero-title">
+      Kelajak Kasblarini<br><span>Bugundan Boshlang</span>
+    </h1>
+    <p class="hero-sub">Sun'iy intellekt va zamonaviy kasblarni o'rganing, real daromadga chiqing.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        <i data-lucide="rocket" style="width:18px;height:18px"></i> Boshlash
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('startup').scrollIntoView({behavior:'smooth'})">
+        <i data-lucide="flame" style="width:18px;height:18px"></i> Startupga qatnashish
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5,000+</div><div class="stat-label">Talabalar</div></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Kurslar</div></div>
+      <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Mentorlar</div></div>
+      <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Mamnunlik</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag reveal">
+        <i data-lucide="info" style="width:12px;height:12px"></i> CODIFY NIMA?
+      </div>
+      <h2 class="section-title reveal reveal-delay-1">Innovatsion<br>Ta'lim <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Platformasi</span></h2>
+      <p class="section-sub reveal reveal-delay-2">Codify — zamonaviy kasblarni noldan o'rgatuvchi, sun'iy intellekt vositalarini amaliy qo'llashni o'rgatuvchi va yoshlarni daromadga olib chiqishga qaratilgan innovatsion ta'lim platformasi.</p>
+      <div class="feature-cards">
+        <div class="card reveal reveal-delay-1">
+          <div class="card-icon"><i data-lucide="briefcase" style="width:20px;height:20px"></i></div>
+          <h4>Zamonaviy kasblar</h4>
+          <p>Kelajak talabiga javob beruvchi kasblarga tayyorlanish</p>
+        </div>
+        <div class="card reveal reveal-delay-2">
+          <div class="card-icon"><i data-lucide="cpu" style="width:20px;height:20px"></i></div>
+          <h4>AI vositalari</h4>
+          <p>Sun'iy intellektni amalda qo'llash ko'nikmalari</p>
+        </div>
+        <div class="card reveal reveal-delay-3">
+          <div class="card-icon"><i data-lucide="trending-up" style="width:20px;height:20px"></i></div>
+          <h4>Real daromad</h4>
+          <p>O'qish jarayonidayoq pul ishlash imkoniyati</p>
+        </div>
+        <div class="card reveal reveal-delay-3">
+          <div class="card-icon"><i data-lucide="globe" style="width:20px;height:20px"></i></div>
+          <h4>Ta'lim + Ish</h4>
+          <p>Ekotizim: o'rganish, amaliyot, ish topish bir joyda</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="orbits">
+        <div class="orbit"><div class="orbit-dot"></div></div>
+        <div class="orbit"><div class="orbit-dot"></div></div>
+        <div class="orbit"><div class="orbit-dot"></div></div>
+        <div class="orbit-core"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTIONS -->
+<section id="directions">
+  <div class="dir-header">
+    <div class="section-tag reveal"><i data-lucide="layout-grid" style="width:12px;height:12px"></i> Ta'lim yo'nalishlari</div>
+    <h2 class="section-title reveal reveal-delay-1">Qaysi kasbi o'rganmoqchisiz?</h2>
+    <p class="section-sub reveal reveal-delay-2" style="text-align:center;margin:0.8rem auto 0">Har bir yo'nalish uchun amaliyotga yo'naltirilgan dastur tayyorlangan</p>
+  </div>
+  <div class="dir-grid">
+    <div class="dir-card reveal">
+      <div class="dir-icon"><i data-lucide="code-2" style="width:24px;height:24px"></i></div>
+      <h3>Dasturlash</h3>
+      <p>Web, mobile va backend dasturlash</p>
+    </div>
+    <div class="dir-card reveal reveal-delay-1">
+      <div class="dir-icon"><i data-lucide="pen-tool" style="width:24px;height:24px"></i></div>
+      <h3>Dizayn</h3>
+      <p>UI/UX, grafik va brending dizayn</p>
+    </div>
+    <div class="dir-card reveal reveal-delay-2">
+      <div class="dir-icon"><i data-lucide="megaphone" style="width:24px;height:24px"></i></div>
+      <h3>Marketing</h3>
+      <p>Digital marketing va SMM</p>
+    </div>
+    <div class="dir-card reveal reveal-delay-3">
+      <div class="dir-icon"><i data-lucide="bar-chart-2" style="width:24px;height:24px"></i></div>
+      <h3>Data Analitika</h3>
+      <p>Ma'lumotlar tahlili va vizualizatsiya</p>
+    </div>
+    <div class="dir-card reveal reveal-delay-1">
+      <div class="dir-icon"><i data-lucide="bot" style="width:24px;height:24px"></i></div>
+      <h3>Sun'iy Intellekt</h3>
+      <p>ML, AI va prompt engineering</p>
+    </div>
+  </div>
+  <div class="dir-features reveal">
+    <div class="dir-feat"><i data-lucide="play-circle" class="icon" style="width:14px;height:14px;color:var(--orange)"></i> Video darslar</div>
+    <div class="dir-feat"><i data-lucide="clipboard-list" class="icon" style="width:14px;height:14px;color:var(--orange)"></i> Amaliy topshiriqlar</div>
+    <div class="dir-feat"><i data-lucide="folder-open" class="icon" style="width:14px;height:14px;color:var(--orange)"></i> Loyiha asosida o'qitish</div>
+    <div class="dir-feat"><i data-lucide="users" class="icon" style="width:14px;height:14px;color:var(--orange)"></i> Real mentorlar</div>
+    <div class="dir-feat"><i data-lucide="award" class="icon" style="width:14px;height:14px;color:var(--orange)"></i> Sertifikat</div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="cert-grid">
+    <div>
+      <div class="section-tag reveal"><i data-lucide="award" style="width:12px;height:12px"></i> Sertifikatlar</div>
+      <h2 class="section-title reveal reveal-delay-1">Xalqaro standartda <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">tasdiqlangan</span></h2>
+      <p class="section-sub reveal reveal-delay-2">CODIFY sertifikati ish beruvchilar uchun sizning malakangizning eng ishonchli tasdiqidir.</p>
+      <div class="trust-badges reveal" style="margin-top:2rem">
+        <div class="badge"><div class="badge-icon"><i data-lucide="trophy" style="width:20px;height:20px"></i></div><div class="badge-text">Rasmiy sertifikat</div></div>
+        <div class="badge"><div class="badge-icon"><i data-lucide="link" style="width:20px;height:20px"></i></div><div class="badge-text">LinkedIn'da ulashish</div></div>
+        <div class="badge"><div class="badge-icon"><i data-lucide="check-circle" style="width:20px;height:20px"></i></div><div class="badge-text">Ish beruvchilar uchun tasdiq</div></div>
+        <div class="badge"><div class="badge-icon"><i data-lucide="globe" style="width:20px;height:20px"></i></div><div class="badge-text">Xalqaro standart</div></div>
+      </div>
+    </div>
+    <div class="cert-mockup reveal reveal-delay-1">
+      <div class="cert-inner">
+        <div class="cert-logo-wrap">
+          <div class="cert-logo">CODIFY</div>
+        </div>
+        <div class="cert-title">Kelajak Kasblari Platformasi</div>
+        <div class="cert-divider"></div>
+        <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.5rem;letter-spacing:2px;text-transform:uppercase">Bu sertifikat taqdim etiladi</div>
+        <div class="cert-name">Abdullayev Sardor</div>
+        <div class="cert-course">Sun'iy Intellekt va Machine Learning</div>
+        <div class="cert-seal"><i data-lucide="medal" style="width:24px;height:24px"></i></div>
+        <div style="font-size:0.68rem;color:var(--text-muted);margin-top:1.5rem">2024 · CODIFY Platform</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STARTUP -->
+<section id="startup">
+  <div class="startup-header">
+    <div class="section-tag reveal"><i data-lucide="rocket" style="width:12px;height:12px"></i> CODIFY STARTUPS</div>
+    <h2 class="section-title reveal reveal-delay-1">G'oyangizni <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">reallikka</span> aylantiring</h2>
+    <p class="section-sub reveal reveal-delay-2" style="text-align:center;margin:0.8rem auto 0">Startup g'oyangiz bor? Uni amalga oshirishga yordam beramiz.</p>
+  </div>
+  <div class="timeline reveal">
+    <div class="timeline-step">
+      <div class="step-num">1</div>
+      <div class="step-title">G'oya yuborish</div>
+      <div class="step-desc">Startup g'oyangizni platformaga yuboring</div>
+    </div>
+    <div class="timeline-step">
+      <div class="step-num">2</div>
+      <div class="step-title">TOP-3 tanlash</div>
+      <div class="step-desc">Ekspertlar eng yaxshi g'oyalarni tanlaydi</div>
+    </div>
+    <div class="timeline-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Jamoa tuzish</div>
+      <div class="step-desc">Talentlar bilan jamoangizni shakllantiring</div>
+    </div>
+    <div class="timeline-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Amaliyotga tatbiq</div>
+      <div class="step-desc">Loyihani ishga tushiring va o'sbting</div>
+    </div>
+  </div>
+  <div class="startup-cta reveal">
+    <button class="btn-primary" style="margin-top:1rem">
+      <i data-lucide="lightbulb" style="width:18px;height:18px"></i> Startup g'oyam bor
+    </button>
+  </div>
+</section>
+
+<!-- JOBS -->
+<section id="jobs">
+  <div class="jobs-grid">
+    <div>
+      <div class="section-tag reveal"><i data-lucide="briefcase" style="width:12px;height:12px"></i> Ish va Freelance</div>
+      <h2 class="section-title reveal reveal-delay-1">Ish va freelance <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">platforma</span></h2>
+      <p class="section-sub reveal reveal-delay-2">O'qib bo'lgach ishni ham, buyurtmachini ham o'sha joydan toping.</p>
+      <ul class="job-features reveal">
+        <li><i data-lucide="filter" style="width:16px;height:16px;color:var(--orange)"></i> Kasb bo'yicha filter</li>
+        <li><i data-lucide="map-pin" style="width:16px;height:16px;color:var(--orange)"></i> Hudud bo'yicha filter</li>
+        <li><i data-lucide="file-text" style="width:16px;height:16px;color:var(--orange)"></i> Resume joylash bepul</li>
+        <li><i data-lucide="building-2" style="width:16px;height:16px;color:var(--orange)"></i> Vakansiya joylash bepul</li>
+        <li><i data-lucide="laptop" style="width:16px;height:16px;color:var(--orange)"></i> Freelance platforma tizimi</li>
+      </ul>
+    </div>
+    <div class="dashboard-mock reveal reveal-delay-1">
+      <div class="dash-topbar">
+        <div class="dash-dot" style="background:#ff5f57"></div>
+        <div class="dash-dot" style="background:#ffbd2e"></div>
+        <div class="dash-dot" style="background:#28c840"></div>
+        <span class="dash-title">CODIFY Jobs Platform</span>
+      </div>
+      <div class="dash-body">
+        <div class="dash-filters">
+          <span class="dash-filter active">Barchasi</span>
+          <span class="dash-filter">Toshkent</span>
+          <span class="dash-filter">Remote</span>
+          <span class="dash-filter">Freelance</span>
+        </div>
+        <div class="job-item">
+          <div class="job-logo"><i data-lucide="pen-tool" style="width:16px;height:16px"></i></div>
+          <div class="job-info"><h5>UI/UX Designer</h5><p>TechCorp · Toshkent</p></div>
+          <div class="job-salary">$800+</div>
+        </div>
+        <div class="job-item">
+          <div class="job-logo"><i data-lucide="code-2" style="width:16px;height:16px"></i></div>
+          <div class="job-info"><h5>Frontend Developer</h5><p>Startup Hub · Remote</p></div>
+          <div class="job-salary">$1200+</div>
+        </div>
+        <div class="job-item">
+          <div class="job-logo"><i data-lucide="bar-chart-2" style="width:16px;height:16px"></i></div>
+          <div class="job-info"><h5>Data Analyst</h5><p>FinTech Co · Toshkent</p></div>
+          <div class="job-salary">$1000+</div>
+        </div>
+        <div class="job-item">
+          <div class="job-logo"><i data-lucide="bot" style="width:16px;height:16px"></i></div>
+          <div class="job-info"><h5>AI Engineer</h5><p>Global · Freelance</p></div>
+          <div class="job-salary">$2000+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COINS -->
+<section id="coins">
+  <div class="coins-header">
+    <div class="section-tag reveal"><i data-lucide="coins" style="width:12px;height:12px"></i> Coin tizimi</div>
+    <h2 class="section-title reveal reveal-delay-1">O'rganib, <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">mukofot</span> oling</h2>
+    <p class="section-sub reveal reveal-delay-2" style="text-align:center;margin:0.8rem auto 0">Har bir faoliyatingiz uchun coin yig'ing va qimmatli narxlarga almashing</p>
+  </div>
+  <div class="coins-grid">
+    <div class="coin-card reveal">
+      <div class="coin-icon"><i data-lucide="zap" style="width:26px;height:26px"></i></div>
+      <h3>Aktivlik coinlari</h3>
+      <p>Dars ko'rish, topshiriq bajarish va forumlarda qatnashish uchun coin yig'ing</p>
+    </div>
+    <div class="coin-card reveal reveal-delay-1">
+      <div class="coin-icon"><i data-lucide="book-open" style="width:26px;height:26px"></i></div>
+      <h3>Pullik kurslarga</h3>
+      <p>Yig'ilgan coinlaringizni premium kurslarga almashtiring</p>
+    </div>
+    <div class="coin-card reveal reveal-delay-2">
+      <div class="coin-icon"><i data-lucide="cpu" style="width:26px;height:26px"></i></div>
+      <h3>Premium AI obunalar</h3>
+      <p>ChatGPT, Midjourney kabi AI vositalariga bepul kirish</p>
+    </div>
+    <div class="coin-card reveal reveal-delay-3">
+      <div class="coin-icon"><i data-lucide="graduation-cap" style="width:26px;height:26px"></i></div>
+      <h3>Eksklyuziv darslar</h3>
+      <p>Faqat coinlar bilan ochiluvchi maxsus master-class'lar</p>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONALIZED -->
+<section id="personalized">
+  <div style="text-align:center">
+    <div class="section-tag reveal"><i data-lucide="user-check" style="width:12px;height:12px"></i> Shaxsiy tizim</div>
+    <h2 class="section-title reveal reveal-delay-1">Sizga moslashtirilgan <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">o'quv yo'li</span></h2>
+  </div>
+  <div class="pers-grid">
+    <div class="pers-item reveal">
+      <div class="pers-icon"><i data-lucide="clipboard-list" style="width:22px;height:22px"></i></div>
+      <h4>Individual o'qish rejasi</h4>
+      <p>Maqsadingiz va darajangizga qarab tuzilgan shaxsiy dastur</p>
+    </div>
+    <div class="pers-item reveal reveal-delay-1">
+      <div class="pers-icon"><i data-lucide="activity" style="width:22px;height:22px"></i></div>
+      <h4>Progress tracking</h4>
+      <p>Har kunlik o'sishingizni kuzatib boring, maqsadga qarab harakatlaning</p>
+    </div>
+    <div class="pers-item reveal reveal-delay-2">
+      <div class="pers-icon"><i data-lucide="compass" style="width:22px;height:22px"></i></div>
+      <h4>Karyera maslahatlari</h4>
+      <p>Soha ekspertlaridan shaxsiy karyera yo'nalishi bo'yicha maslahat</p>
+    </div>
+    <div class="pers-item reveal reveal-delay-3">
+      <div class="pers-icon"><i data-lucide="handshake" style="width:22px;height:22px"></i></div>
+      <h4>Ish beruvchilar bilan aloqa</h4>
+      <p>To'g'ridan-to'g'ri yirik kompaniyalar bilan bog'laning</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="why-grid">
+    <div>
+      <div class="section-tag reveal"><i data-lucide="star" style="width:12px;height:12px"></i> Nima uchun CODIFY?</div>
+      <h2 class="section-title reveal reveal-delay-1">O'zbekistondagi <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">eng yaxshi</span> tanlov</h2>
+      <div class="checklist">
+        <div class="check-item reveal"><div class="check-mark"><i data-lucide="check" style="width:12px;height:12px"></i></div><div class="check-text">O'zbek tilida — to'liq tushunish uchun</div></div>
+        <div class="check-item reveal reveal-delay-1"><div class="check-mark"><i data-lucide="check" style="width:12px;height:12px"></i></div><div class="check-text">Amaliyotga yo'naltirilgan ta'lim</div></div>
+        <div class="check-item reveal reveal-delay-2"><div class="check-mark"><i data-lucide="check" style="width:12px;height:12px"></i></div><div class="check-text">Zamonaviy va talab yuqori kasblar</div></div>
+        <div class="check-item reveal reveal-delay-3"><div class="check-mark"><i data-lucide="check" style="width:12px;height:12px"></i></div><div class="check-text">Sun'iy intellekt ko'nikmalari</div></div>
+        <div class="check-item reveal"><div class="check-mark"><i data-lucide="check" style="width:12px;height:12px"></i></div><div class="check-text">Xalqaro sertifikat</div></div>
+        <div class="check-item reveal reveal-delay-1"><div class="check-mark"><i data-lucide="check" style="width:12px;height:12px"></i></div><div class="check-text">Kuchli networking va jamoa</div></div>
+      </div>
+    </div>
+    <div class="why-visual reveal reveal-delay-2">
+      <div class="big-number">98%</div>
+      <div class="big-label">Bitiruvchilar ish topadi</div>
+      <div class="why-stats">
+        <div class="why-stat"><div class="why-stat-num">3x</div><div class="why-stat-label">Maosh o'sishi</div></div>
+        <div class="why-stat"><div class="why-stat-num">6oy</div><div class="why-stat-label">O'rtacha kurs</div></div>
+        <div class="why-stat"><div class="why-stat-num">50+</div><div class="why-stat-label">Hamkor kompaniyalar</div></div>
+        <div class="why-stat"><div class="why-stat-num">24/7</div><div class="why-stat-label">Qo'llab-quvvatlash</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <h2 class="cta-title">Bugun o'rgan —<br><span>ertaga yetakchi bo'l!</span></h2>
+  <p class="cta-sub">Minglab yoshlar allaqachon boshlagan. Siz ham bugun qo'shiling.</p>
+  <button class="btn-big">
+    <i data-lucide="rocket" style="width:20px;height:20px"></i> Hoziroq boshlash
+  </button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-accent"></div>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-wrap">
+        <div class="footer-logo">CODIFY</div>
+      </div>
+      <p class="footer-desc">Zamonaviy kasblarni o'rgatib, O'zbekiston yoshlarini global bozorga olib chiqamiz.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#" title="Telegram"><i data-lucide="send" style="width:16px;height:16px"></i></a>
+        <a class="social-btn" href="#" title="Instagram"><i data-lucide="instagram" style="width:16px;height:16px"></i></a>
+        <a class="social-btn" href="#" title="YouTube"><i data-lucide="youtube" style="width:16px;height:16px"></i></a>
+        <a class="social-btn" href="#" title="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Platforma</h5>
+      <ul>
+        <li><a href="#about">CODIFY haqida</a></li>
+        <li><a href="#directions">Kurslar</a></li>
+        <li><a href="#certificates">Sertifikatlar</a></li>
+        <li><a href="#startup">Startup dasturi</a></li>
+        <li><a href="#jobs">Ish topish</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Aloqa</h5>
+      <ul>
+        <li><a href="#">Telegram kanal</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Startup shakli</a></li>
+        <li><a href="#">Biz bilan bog'laning</a></li>
+        <li><a href="#">info@codify.uz</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 CODIFY. Barcha huquqlar himoyalangan.</p>
+    <p style="color:var(--orange);font-weight:600;font-family:var(--font-display);letter-spacing:1px;font-size:0.82rem">Kelajak bugundan boshlanadi ✦</p>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navlinks').classList.toggle('open');
+  }
+
+  // Particles
+  (function() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 5 + 2;
+      p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${Math.random()*0.4+0.1};animation-delay:${Math.random()*8}s;animation-duration:${Math.random()*6+6}s;`;
+      container.appendChild(p);
+    }
+  })();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background = window.scrollY > 50 ? 'rgba(12,12,12,0.97)' : 'rgba(20,20,20,0.88)';
+  });
+
+  // Init Lucide icons
+  lucide.createIcons();
+</script>
+</body>
+</html>
